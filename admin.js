@@ -1,39 +1,18 @@
-// admin.js - Full Integrated Version
-
-// ১. পেমেন্ট সেটিংস সেভ করার লজিক
-const paymentForm = document.getElementById('payment-settings-form');
-if (paymentForm) {
-    paymentForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const bkash = document.getElementById('bkash-number').value;
-        const nagad = document.getElementById('nagad-number').value;
-        const rocket = document.getElementById('rocket-number').value;
-        const notice = document.getElementById('payment-notice').value;
-
-        // আপডেট করা (এখানে আপনার সঠিক ID বা query ব্যবহার করুন)
-        const { data, error } = await supabase
-            .from('site_settings')
-            .upsert([
-                { 
-                    id: 'YOUR_SETTINGS_ID_HERE', 
-                    bkash_number: bkash, 
-                    nagad_number: nagad, 
-                    rocket_number: rocket,
-                    payment_notice: notice 
-                }
-            ]);
-
-        if (error) alert('Error updating settings: ' + error.message);
-        else alert('Payment settings updated successfully!');
-    });
+async function loadOrders() {
+    const { data, error } = await supabase.from('orders').select('*');
+    if (data) {
+        const container = document.getElementById('order-list');
+        if(container) {
+            container.innerHTML = data.map(o => `
+                <div style="border:1px solid #ccc; padding:10px; margin:5px;">
+                    <p>নাম: ${o.customer_name} | প্যাকেজ: ${o.package_name}</p>
+                    <p>ট্রানজেকশন: ${o.trx_id} | স্ট্যাটাস: ${o.status}</p>
+                </div>
+            `).join('');
+        }
+    }
 }
-
-// ২. প্যানেল লোড হওয়ার সময় ডাটাবেস থেকে সেটিংস দেখানো
-async function loadPaymentSettings() {
-    const { data, error } = await supabase
-        .from('site_settings')
-        .select('*')
-        .single();
+window.onload = loadOrders;
 
     if (data) {
         document.getElementById('bkash-number').value = data.bkash_number || '';
