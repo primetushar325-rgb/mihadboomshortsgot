@@ -141,3 +141,22 @@ try{session=JSON.parse(localStorage.getItem('mb_admin_session')||'null');}catch(
 .admin-btn:hover {
     background: #0056b3;
       }
+// প্যানেল লোড হওয়ার সময় আগের সেটিংসগুলো ইনপুট বক্সে দেখানো
+async function loadPaymentSettings() {
+    const { data, error } = await supabase
+        .from('site_settings')
+        .select('*')
+        .single();
+
+    if (data) {
+        document.getElementById('bkash-number').value = data.bkash_number || '';
+        document.getElementById('nagad-number').value = data.nagad_number || '';
+        document.getElementById('rocket-number').value = data.rocket_number || '';
+        document.getElementById('payment-notice').value = data.payment_notice || '';
+    }
+}
+
+// পেজ ওপেন হওয়ার সময় ফাংশনটি কল করা
+window.onload = function() {
+    loadPaymentSettings();
+};
