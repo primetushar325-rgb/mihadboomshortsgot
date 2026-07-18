@@ -1,0 +1,9 @@
+<form id="order-form">
+    <input type="text" id="customer-name" placeholder="আপনার নাম" required>
+    <input type="text" id="whatsapp-number" placeholder="আপনার হোয়াটসঅ্যাপ নম্বর" required>
+    <input type="hidden" id="package-name" value="Package Name Here"> <!-- এটি ডায়নামিক হবে -->
+    <input type="number" id="price" value="0" readonly>
+    <input type="text" id="trx-id" placeholder="ট্রানজেকশন আইডি (bKash/Nagad)" required>
+    <input type="file" id="payment-screenshot" accept="image/*" required>
+    <button type="submit">Confirm Order</button>
+</form>
