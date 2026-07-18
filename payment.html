@@ -2,33 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirm Payment</title>
-    <!-- আপনার স্টাইল থাকলে এখানে লিংক করুন -->
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <form id="order-form">
+        <input type="text" id="customer-name" placeholder="আপনার নাম" required>
+        <input type="text" id="whatsapp-number" placeholder="হোয়াটসঅ্যাপ নম্বর" required>
+        <input type="hidden" id="package-name" value="Mihad Boom Shorts Service">
+        <input type="number" id="price" value="500" readonly>
+        <input type="text" id="trx-id" placeholder="ট্রানজেকশন আইডি" required>
+        <button type="submit" id="submit-btn">Confirm Order</button>
+    </form>
 
-    <div class="container">
-        <h2>পেমেন্ট কনফার্ম করুন</h2>
-        <form id="order-form">
-            <input type="text" id="customer-name" placeholder="আপনার নাম" required>
-            <input type="text" id="whatsapp-number" placeholder="আপনার হোয়াটসঅ্যাপ নম্বর" required>
-            
-            <!-- হিডেন ফিল্ড - এখানে আপনার প্যাকেজের নাম ও দাম থাকবে -->
-            <input type="hidden" id="package-name" value="Boom Shorts Basic">
-            <input type="number" id="price" value="500" readonly>
-            
-            <input type="text" id="trx-id" placeholder="ট্রানজেকশন আইডি (bKash/Nagad)" required>
-            
-            <p>পেমেন্ট স্ক্রিনশট আপলোড করুন:</p>
-            <input type="file" id="payment-screenshot" accept="image/*" required>
-            
-            <button type="submit" id="submit-btn">Confirm Order</button>
-        </form>
-    </div>
-
-    <!-- Supabase এবং Script ফাইলগুলোর লিংক -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script src="order.js"></script>
